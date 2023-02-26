@@ -9,11 +9,27 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link as RouterLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import NotificationContent from './../notification/index';
+
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const notificationData = {
+    userAvatar: 'https://source.unsplash.com/random',
+    message: 'Room 312',
+    timestamp: '1 hour ago',
+  };
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
@@ -37,9 +53,25 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleClick}>
           <NotificationsOutlinedIcon />
         </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <NotificationContent notification={notificationData} />
+          </MenuItem>
+          <MenuItem onClick={handleClose}>Notification 2</MenuItem>
+          <MenuItem onClick={handleClose}>Notification 3</MenuItem>
+        </Menu>
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>

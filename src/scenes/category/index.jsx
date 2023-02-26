@@ -1,63 +1,37 @@
-import { Box } from '@mui/material';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { tokens } from '../../theme';
-import { mockDataContacts } from '../../data/mockData';
-import Header from '../../components/Header';
 import { useTheme } from '@mui/material';
-
-const Contacts = () => {
+import { tokens } from './../../theme';
+import Header from './../../components/Header';
+import { Box } from '@mui/material';
+import { mockDataContacts } from '../../data/mockData';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { Button } from '@mui/material';
+const Category = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const columns = [
     { field: 'id', headerName: 'ID', flex: 0.5 },
-    { field: 'registrarId', headerName: 'Registrar ID' },
+    { field: 'categoryId', headerName: 'Category ID' },
     {
-      field: 'name',
-      headerName: 'Name',
-      flex: 1,
+      field: 'categoryName',
+      headerName: 'Category Name',
       cellClassName: 'name-column--cell',
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
+      field: 'description',
+      headerName: 'Description',
       headerAlign: 'left',
       align: 'left',
-    },
-    {
-      field: 'phone',
-      headerName: 'Phone Number',
       flex: 1,
     },
     {
-      field: 'email',
-      headerName: 'Email',
-      flex: 1,
-    },
-    {
-      field: 'address',
-      headerName: 'Address',
-      flex: 1,
-    },
-    {
-      field: 'city',
-      headerName: 'City',
-      flex: 1,
-    },
-    {
-      field: 'zipCode',
-      headerName: 'Zip Code',
+      field: 'categoryImage',
+      headerName: 'Category Image',
       flex: 1,
     },
   ];
-
   return (
     <Box m="20px">
-      <Header
-        title="CUSTOMERS INFORMATION"
-        subtitle="List of customers for Future Reference"
-      />
+      <Header title="Category" subtitle="List of Categories" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -90,6 +64,11 @@ const Contacts = () => {
           },
         }}
       >
+        <Box display="flex" justifyContent="end" mt="20px">
+          <Button type="submit" color="secondary" variant="contained">
+            Create New Category
+          </Button>
+        </Box>
         <DataGrid
           rows={mockDataContacts}
           columns={columns}
@@ -99,5 +78,4 @@ const Contacts = () => {
     </Box>
   );
 };
-
-export default Contacts;
+export default Category;
