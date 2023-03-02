@@ -25,7 +25,6 @@ const Form = () => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box m="20px">
         <Header title="Profile" subtitle="Manage your Profile" />
-
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
