@@ -7,7 +7,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import { Box, DialogContentText, InputBase, IconButton } from '@mui/material';
+import {
+  Box,
+  DialogContentText,
+  InputBase,
+  IconButton,
+  Grid,
+} from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import * as API from '../../constants/api';
 import { Typography } from '@mui/material';
@@ -54,7 +60,6 @@ function InvoiceModal({
   const [files, setFiles] = useState([]);
   const [preview, setPreview] = useState(null);
   const [formFields, setFormFields] = useState();
-  console.log('🚀 ~ file: RoomModal.jsx:56 ~ formFields:', formFields);
   useEffect(() => {
     setFormFields(selectedRow);
   }, [selectedRow]);
@@ -123,7 +128,6 @@ function InvoiceModal({
     await axios
       .post(API.ORDER, formFields)
       .then((res) => {
-        console.log('🚀 ~ file: RoomModal.jsx:87 ~ .then ~ res:', res);
         updateCreateUI(res.data.message);
         setLoading(false);
         handleToastSuccess('Create room successfully');
@@ -167,7 +171,6 @@ function InvoiceModal({
     axios
       .delete(`${API.ORDER}/${selectedRow.id}`)
       .then((res) => {
-        console.log('🚀 ~ file: InvoiceModal.jsx:164 ~ .then ~ res:', res);
         updateDeleteUI(selectedRow.id);
         setLoading(false);
         handleToastSuccess(res.data.message);
@@ -187,62 +190,78 @@ function InvoiceModal({
       {type === 'create' && (
         <Dialog open={open} onClose={() => onClose()}>
           <DialogTitle variant="h2">Create Invoice</DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{ paddingTop: '24px' }}>
             <form onSubmit={handleCreateRoom} id="my-form">
-              <TextField
-                name="code"
-                label="Code"
-                value={formFields ? formFields.code : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="detail"
-                label="Detail"
-                value={formFields ? formFields.detail : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="description"
-                label="Description"
-                value={formFields ? formFields.description : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="price"
-                label="Price"
-                value={formFields ? formFields.price : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="adult"
-                label="Adult"
-                value={formFields ? formFields.adult : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="kid"
-                label="Kid"
-                value={formFields ? formFields.kid : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="categoryId"
-                label="Category ID"
-                value={formFields ? formFields.categoryId : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="code"
+                    label="Code"
+                    value={formFields ? formFields.code : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="detail"
+                    label="Detail"
+                    value={formFields ? formFields.detail : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="description"
+                    label="Description"
+                    value={formFields ? formFields.description : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="price"
+                    label="Price"
+                    value={formFields ? formFields.price : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="adult"
+                    label="Adult"
+                    value={formFields ? formFields.adult : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="kid"
+                    label="Kid"
+                    value={formFields ? formFields.kid : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="categoryId"
+                    label="Category ID"
+                    value={formFields ? formFields.categoryId : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>
@@ -269,84 +288,106 @@ function InvoiceModal({
           <DialogTitle>Update Invoice</DialogTitle>
           <DialogContent>
             <form onSubmit={handleUpdate} id="my-form">
-              <TextField
-                name="code"
-                label="Code"
-                value={formFields ? formFields.code : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="date"
-                label="Date"
-                value={formFields ? formFields.date : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="status"
-                label="Status"
-                value={formFields ? formFields.status : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="adminAction"
-                label="Admin Action"
-                value={formFields ? formFields.adminAction : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="paymentMethod"
-                label="Payment Method"
-                value={formFields ? formFields.paymentMethod : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="paymentDate"
-                label="Payment Date"
-                value={formFields ? formFields.paymentDate : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="total"
-                label="Total"
-                value={formFields ? formFields.total : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="checkInDate"
-                label="Check In Date"
-                value={formFields ? formFields.checkInDate : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="userId"
-                label="UserId"
-                value={formFields ? formFields.userId : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="guestId"
-                label="GuestId"
-                value={formFields ? formFields.guestId : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="code"
+                    label="Code"
+                    value={formFields ? formFields.code : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="date"
+                    label="Date"
+                    value={formFields ? formFields.date : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="status"
+                    label="Status"
+                    value={formFields ? formFields.status : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="adminAction"
+                    label="Admin Action"
+                    value={formFields ? formFields.adminAction : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="paymentMethod"
+                    label="Payment Method"
+                    value={formFields ? formFields.paymentMethod : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="paymentDate"
+                    label="Payment Date"
+                    value={formFields ? formFields.paymentDate : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="total"
+                    label="Total"
+                    value={formFields ? formFields.total : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="checkInDate"
+                    label="Check In Date"
+                    value={formFields ? formFields.checkInDate : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="userId"
+                    label="UserId"
+                    value={formFields ? formFields.userId : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="guestId"
+                    label="GuestId"
+                    value={formFields ? formFields.guestId : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>

@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import { Box, DialogContentText, InputBase } from '@mui/material';
+import { Box, DialogContentText, Grid, InputBase } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import * as API from '../../constants/api';
 import { Typography } from '@mui/material';
@@ -199,7 +199,6 @@ function CreateCategoryModal({
                     flexDirection: 'column',
                   }}
                 >
-                  <Box className={classes.root}></Box>
                   <Box
                     className={classes.root}
                     sx={{
@@ -240,21 +239,27 @@ function CreateCategoryModal({
                   </Box>
                 </Box>
               </Box>
-              <TextField
-                name="name"
-                label="Category Name"
-                value={formFields ? formFields.name : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="description"
-                label="Description"
-                value={formFields ? formFields.description : null}
-                onChange={handleChange}
-                fullWidth
-              />
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="name"
+                    label="Category Name"
+                    value={formFields ? formFields.name : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="description"
+                    label="Description"
+                    value={formFields ? formFields.description : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>
@@ -328,60 +333,27 @@ function CreateCategoryModal({
                   </label>
                 </Box>
               </Box>
-              <TextField
-                name="name"
-                label="Room Name"
-                value={formFields ? formFields.name : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="detail"
-                label="Detail"
-                value={formFields ? formFields.detail : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="description"
-                label="Description"
-                value={formFields ? formFields.description : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="price"
-                label="Price"
-                value={formFields ? formFields.price : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="adult"
-                label="Adult"
-                value={formFields ? formFields.adult : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="kid"
-                label="Kid"
-                value={formFields ? formFields.kid : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="categoryId"
-                label="Category ID"
-                value={formFields ? formFields.categoryId : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="name"
+                    label="Category Name"
+                    value={formFields ? formFields.name : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="description"
+                    label="Description"
+                    value={formFields ? formFields.description : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>

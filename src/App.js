@@ -67,122 +67,7 @@ function App() {
             {loading && <div className={classes.loading}> <CircularProgress /> </div>} {/* Show loading spinner if loading is true */}
             
             <Routes>
-              {/* <Route path="/login" element={<Login setLoading={setLoading} />} />
-              <Route path="/signup" element={<Signup setLoading={setLoading} />} />
-              <Route
-                path="/"
-                element={
-                  <PrivateRoute
-                    element={<Dashboard setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <PrivateRoute
-                    element={<Profile setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/team"
-                element={
-                  <PrivateRoute
-                    element={<Team setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/guest"
-                element={
-                  <PrivateRoute
-                    element={<Guests setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/invoices"
-                element={
-                  <PrivateRoute
-                    element={<Invoices setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/category"
-                element={
-                  <PrivateRoute
-                    element={<Category setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/room"
-                element={
-                  <PrivateRoute
-                    element={<Room setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/form"
-                element={
-                  <PrivateRoute
-                    element={<Form setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/bar"
-                element={
-                  <PrivateRoute
-                    element={<Bar setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/pie"
-                element={
-                  <PrivateRoute
-                    element={<Pie setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/line"
-                element={
-                  <PrivateRoute
-                    element={<Line setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/faq"
-                element={
-                  <PrivateRoute
-                    element={<FAQ setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/calendar"
-                element={
-                  <PrivateRoute
-                    element={<Calendar setLoading={setLoading} />}
-                  />
-                }
-              />
-              <Route
-                path="/geography"
-                element={
-                  <PrivateRoute
-                    element={<Geography setLoading={setLoading} />}
-                  />
-                }
-              /> */}
-
-              <Route
+              {/* <Route
                 path="/"
                 element={
                   signed ? (
@@ -191,10 +76,10 @@ function App() {
                     <Navigate to="/login" />
                   )
                   }
-              />
+              /> */}
               <Route path="/login" exact  element={<Login setLoading={setLoading}/>} />
               <Route path="/team" element={<PrivateRoute Component={<Team setLoading={setLoading}/>}/>}/>
-              <Route path="/" exact  element={<Dashboard setLoading={setLoading}/>} />
+              <Route path="/dashboard" exact  element={<Dashboard setLoading={setLoading}/>} />
               <Route path="/guest" exact  element={<PrivateRoute Component={<Guests setLoading={setLoading}/>}/>} />
               <Route path="/invoices" exact  element={<PrivateRoute Component={<Invoices setLoading={setLoading}/>}/>} />
               <Route path="/category" exact element={<PrivateRoute Component={<Category setLoading={setLoading}/>}/>} />

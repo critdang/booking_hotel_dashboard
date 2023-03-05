@@ -16,7 +16,14 @@ import * as yup from 'yup';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from '../../components/Header';
 import { useAuth } from '../../context/auth/auth';
+import { useState } from 'react';
+
 const Form = () => {
+  const TOKEN = localStorage.getItem('token');
+
+  const dataUser = JSON.parse(localStorage.getItem('userInfo'));
+
+  const [userInfo, setUserInfo] = useState(dataUser);
   const isNonMobile = useMediaQuery('(min-width:600px)');
 
   const handleFormSubmit = (values) => {
@@ -62,7 +69,7 @@ const Form = () => {
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
+                  value={userInfo.fullName}
                   name="firstName"
                   error={!!touched.firstName && !!errors.firstName}
                   helperText={touched.firstName && errors.firstName}
@@ -72,11 +79,11 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Last Name"
+                  label="Address"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.lastName}
-                  name="lastName"
+                  value={userInfo.address}
+                  name="address"
                   error={!!touched.lastName && !!errors.lastName}
                   helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: 'span 2' }}
@@ -88,7 +95,7 @@ const Form = () => {
                   label="Email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.email}
+                  value={userInfo.email}
                   name="email"
                   error={!!touched.email && !!errors.email}
                   helperText={touched.email && errors.email}
@@ -98,42 +105,15 @@ const Form = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Contact Number"
+                  label="Phone"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.contact}
-                  name="contact"
-                  error={!!touched.contact && !!errors.contact}
-                  helperText={touched.contact && errors.contact}
+                  value={userInfo.phone}
+                  name="phone"
+                  error={!!touched.phone && !!errors.phone}
+                  helperText={touched.phone && errors.phone}
                   sx={{ gridColumn: 'span 2' }}
                 />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Address 1*"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.address1}
-                  name="address1"
-                  error={!!touched.address1 && !!errors.address1}
-                  helperText={touched.address1 && errors.address1}
-                  sx={{ gridColumn: 'span 2' }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Address 2"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.address2}
-                  name="address2"
-                  error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
-                  sx={{ gridColumn: 'span 2' }}
-                />
-
                 <RadioGroup
                   style={{
                     display: 'flex',
@@ -141,6 +121,7 @@ const Form = () => {
                     flexDirection: 'row',
                     gridColumn: 'span 2',
                   }}
+                  value={userInfo.gender}
                 >
                   <Typography
                     variant="h4"
@@ -214,7 +195,7 @@ const Form = () => {
                   sx={{ gridColumn: 'span 2' }}
                 />
               </Box>
-              <Box display="flex" justifyContent="end" mt="20px">
+              <Box display="flex" justifyContent="end" mt={2} sx={{ gap: 2 }}>
                 <Button type="submit" color="secondary" variant="contained">
                   Update user
                 </Button>

@@ -46,7 +46,6 @@ const Invoices = ({ setLoading }) => {
     axios
       .get(`${API.ORDER}`)
       .then((res) => {
-        console.log('🚀 ~ file: index.jsx:54 ~ .then ~ res:', res);
         if (res.data.success) {
           setInvoices(res.data.message);
         }

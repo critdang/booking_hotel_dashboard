@@ -11,7 +11,6 @@ import * as API from '../../constants/api';
 import axios from 'axios';
 import { Edit, Delete } from '@mui/icons-material';
 import TeamModal from './TeamModal';
-import { Button } from '@mui/material';
 
 const Team = ({ setLoading }) => {
   const theme = useTheme();

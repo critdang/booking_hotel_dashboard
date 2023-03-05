@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import { FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { FormControlLabel, Grid, Radio, RadioGroup } from '@mui/material';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
@@ -193,80 +193,91 @@ function GuestModal({
     <>
       {type === 'create' && (
         <Dialog open={open} onClose={() => onClose()}>
-          <DialogTitle variant="h2">Create User</DialogTitle>
+          <DialogTitle variant="h2">Create Guest</DialogTitle>
           <DialogContent>
             <form onSubmit={handleCreateUserInTeam} id="my-form">
-              <TextField
-                name="fullName"
-                label="Full Name"
-                value={formFields ? formFields.name : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="email"
-                label="Email"
-                value={formFields ? formFields.email : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="address"
-                label="Address"
-                value={formFields ? formFields.address : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="phone"
-                label="Phone"
-                value={formFields ? formFields.phone : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-
-              <RadioGroup
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  gridColumn: 'span 2',
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mx: 2,
-                  }}
-                >
-                  {' '}
-                  Gender
-                </Typography>
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                  name="gender"
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  value="male"
-                  name="gender"
-                  control={<Radio />}
-                  label="Male"
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  value="other"
-                  name="gender"
-                  control={<Radio />}
-                  label="Other"
-                  onChange={handleChange}
-                />
-              </RadioGroup>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="fullName"
+                    label="Full Name"
+                    value={formFields ? formFields.name : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    value={formFields ? formFields.email : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="address"
+                    label="Address"
+                    value={formFields ? formFields.address : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="phone"
+                    label="Phone"
+                    value={formFields ? formFields.phone : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <RadioGroup
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      gridColumn: 'span 2',
+                    }}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mx: 2,
+                      }}
+                    >
+                      {' '}
+                      Gender
+                    </Typography>
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                      name="gender"
+                      onChange={handleChange}
+                    />
+                    <FormControlLabel
+                      value="male"
+                      name="gender"
+                      control={<Radio />}
+                      label="Male"
+                      onChange={handleChange}
+                    />
+                    <FormControlLabel
+                      value="other"
+                      name="gender"
+                      control={<Radio />}
+                      label="Other"
+                      onChange={handleChange}
+                    />
+                  </RadioGroup>
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>
@@ -293,76 +304,89 @@ function GuestModal({
           <DialogTitle>Update Guest</DialogTitle>
           <DialogContent>
             <form onSubmit={handleUpdate} id="my-form">
-              <TextField
-                name="fullName"
-                label="Full Name"
-                value={formFields ? formFields.fullName : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="email"
-                label="Email"
-                value={formFields ? formFields.email : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="address"
-                label="Address"
-                value={formFields ? formFields.address : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="phone"
-                label="Phone Number"
-                value={formFields ? formFields.phone : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <RadioGroup
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  gridColumn: 'span 2',
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mx: 2,
-                  }}
-                >
-                  {' '}
-                  Gender
-                </Typography>
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                  name="gender"
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  value="male"
-                  name="gender"
-                  control={<Radio />}
-                  label="Male"
-                  onChange={handleChange}
-                />
-                <FormControlLabel
-                  value="other"
-                  name="gender"
-                  control={<Radio />}
-                  label="Other"
-                  onChange={handleChange}
-                />
-              </RadioGroup>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="fullName"
+                    label="Full Name"
+                    value={formFields ? formFields.fullName : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    value={formFields ? formFields.email : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="address"
+                    label="Address"
+                    value={formFields ? formFields.address : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="phone"
+                    label="Phone"
+                    value={formFields ? formFields.phone : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <RadioGroup
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      gridColumn: 'span 2',
+                    }}
+                    value={formFields ? formFields.gender : null}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mx: 2,
+                      }}
+                    >
+                      {' '}
+                      Gender
+                    </Typography>
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                      name="gender"
+                      onChange={handleChange}
+                    />
+                    <FormControlLabel
+                      value="male"
+                      name="gender"
+                      control={<Radio />}
+                      label="Male"
+                      onChange={handleChange}
+                    />
+                    <FormControlLabel
+                      value="other"
+                      name="gender"
+                      control={<Radio />}
+                      label="Other"
+                      onChange={handleChange}
+                    />
+                  </RadioGroup>
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>

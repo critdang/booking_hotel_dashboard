@@ -15,6 +15,7 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Grid,
 } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import * as API from '../../constants/api';
@@ -59,7 +60,6 @@ function TeamModal({
   const [files, setFiles] = useState([]);
   const [preview, setPreview] = useState(null);
   const [formFields, setFormFields] = useState();
-  console.log('🚀 ~ file: TeamModal.jsx:62 ~ formFields:', formFields);
   useEffect(() => {
     setFormFields(selectedRow);
   }, [selectedRow]);
@@ -345,7 +345,7 @@ function TeamModal({
       )}
       {type === 'edit' && (
         <Dialog open={open} onClose={() => onClose()}>
-          <DialogTitle>Update Category</DialogTitle>
+          <DialogTitle>Update User</DialogTitle>
           <DialogContent>
             <form onSubmit={handleUpdate} id="my-form">
               <Box
@@ -398,75 +398,87 @@ function TeamModal({
                   </label>
                 </Box>
               </Box>
-              <TextField
-                name="fullName"
-                label="Full Name"
-                value={formFields ? formFields.fullName : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="email"
-                label="Email"
-                value={formFields ? formFields.email : null}
-                onChange={handleChange}
-                fullWidth
-              />
-              <TextField
-                name="phone"
-                label="Phone"
-                value={formFields ? formFields.phone : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <TextField
-                name="address"
-                label="Address"
-                value={formFields ? formFields.address : null}
-                onChange={handleChange}
-                required
-                fullWidth
-              />
-              <RadioGroup
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  gridColumn: 'span 2',
-                }}
-                value={formFields ? formFields.gender : null}
-                onChange={handleChange}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{
-                    mx: 2,
-                  }}
-                >
-                  {' '}
-                  Gender
-                </Typography>
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                  name="gender"
-                />
-                <FormControlLabel
-                  value="male"
-                  name="gender"
-                  control={<Radio />}
-                  label="Male"
-                />
-                <FormControlLabel
-                  value="other"
-                  name="gender"
-                  control={<Radio />}
-                  label="Other"
-                />
-              </RadioGroup>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    name="fullName"
+                    label="Full Name"
+                    value={formFields ? formFields.fullName : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="email"
+                    label="Email"
+                    value={formFields ? formFields.email : null}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="phone"
+                    label="Phone"
+                    value={formFields ? formFields.phone : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="address"
+                    label="Address"
+                    value={formFields ? formFields.address : null}
+                    onChange={handleChange}
+                    required
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <RadioGroup
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      gridColumn: 'span 2',
+                    }}
+                    value={formFields ? formFields.gender : null}
+                    onChange={handleChange}
+                  >
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mx: 2,
+                      }}
+                    >
+                      {' '}
+                      Gender
+                    </Typography>
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                      name="gender"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      name="gender"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="other"
+                      name="gender"
+                      control={<Radio />}
+                      label="Other"
+                    />
+                  </RadioGroup>
+                </Grid>
+              </Grid>
             </form>
           </DialogContent>
           <DialogActions>
