@@ -1,29 +1,33 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Box, Typography, useTheme, IconButton } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { tokens } from '../../theme';
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
-import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 import Header from '../../components/Header';
 import * as API from '../../constants/api';
 import axios from 'axios';
 import { Edit, Delete } from '@mui/icons-material';
-import TeamModal from './TeamModal';
+import GuestModal from './GuestModal';
 import { Button } from '@mui/material';
+import { toastAlertFail, toastAlertSuccess } from '../../utils/helperFn';
+import { ToastContainer } from 'react-toastify';
 
-const Team = ({ setLoading }) => {
+const Guest = ({ setLoading }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [team, setTeam] = useState([]);
+  const [guests, setGuests] = useState([]);
   const [isModal, setModal] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow, setSelectedRow] = useState();
   const [typeModal, setTypeModal] = useState(null);
+  const [selectedIdRow, setSelectedIdRow] = useState();
 
   const handleModalOpenWithParams = (type, params) => {
+    const { id, createdAt, updatedAt, ...selectedRowData } = params.row;
+    setSelectedIdRow(id);
+    delete params.row.createdAt;
+    delete params.row.updatedAt;
     setTypeModal(type);
-    setSelectedRow(params.row);
+    setSelectedRow(selectedRowData);
     setModal(true);
   };
   const handleModalCloseWithParams = () => {
@@ -42,21 +46,33 @@ const Team = ({ setLoading }) => {
 
   // handle update UI
   const updateDeleteUI = (id) => {
-    const validRoom = team.filter((item) => item.id !== id);
-    setTeam(validRoom);
+    const validGuest = guests.filter((item) => item.id !== id);
+    setGuests(validGuest);
   };
 
   const updateCreateUI = (newUser) => {
-    setTeam((prevState) => [...prevState, newUser]);
+    setGuests((prevState) => [...prevState, newUser]);
+  };
+
+  const updateUI = (updatedGuest) => {
+    if (updatedGuest) {
+      if (updatedGuest) {
+        setGuests(
+          guests.map((guest) =>
+            guest.id === updatedGuest.id ? updatedGuest : guest
+          )
+        );
+      }
+    }
   };
 
   // get all team members
   useEffect(() => {
     axios
-      .get(`${API.GET_USERS}`)
+      .get(`${API.GUEST}`)
       .then((res) => {
         if (res.data.success) {
-          setTeam(res.data.message);
+          setGuests(res.data.message);
         }
       })
       .catch((error) => {
@@ -66,7 +82,13 @@ const Team = ({ setLoading }) => {
         );
       });
   }, []);
-
+  // handle toast
+  const handleToastFail = (message) => {
+    toastAlertFail(message);
+  };
+  const handleToastSuccess = (message) => {
+    toastAlertSuccess(message);
+  };
   const columns = [
     { field: 'id', headerName: 'ID' },
     {
@@ -97,42 +119,7 @@ const Team = ({ setLoading }) => {
       headerName: 'Gender',
       flex: 1,
     },
-    {
-      field: 'avatar',
-      headerName: 'Avatar',
-      flex: 1,
-    },
-    {
-      field: 'accessLevel',
-      headerName: 'Access Level',
-      flex: 1,
-      renderCell: ({ row: { role } }) => {
-        return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              role === 'admin'
-                ? colors.greenAccent[600]
-                : role === 'manager'
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {role === 'admin' && <AdminPanelSettingsOutlinedIcon />}
-            {role === 'manager' && <SecurityOutlinedIcon />}
-            {role === 'user' && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: '5px' }}>
-              {role}
-            </Typography>
-          </Box>
-        );
-      },
-    },
+
     {
       headerName: 'Actions',
       width: 100,
@@ -160,7 +147,7 @@ const Team = ({ setLoading }) => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="GUESTS" subtitle="Managing the Guests Members" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -190,29 +177,42 @@ const Team = ({ setLoading }) => {
           },
         }}
       >
-        {/* <Box display="flex" justifyContent="end" my="20px">
+        <Box display="flex" justifyContent="end" my="20px">
           <Button
             type="submit"
             color="secondary"
             variant="contained"
             onClick={() => handleModalOpen('create')}
           >
-            Create New User
+            Create New Guest
           </Button>
-        </Box> */}
-        <DataGrid rows={team} columns={columns} />
+        </Box>
+        <GuestModal
+          type={typeModal}
+          open={isModal}
+          onClose={handleModalCloseWithParams}
+          selectedRow={selectedRow}
+          selectedIdRow={selectedIdRow}
+          updateCreateUI={updateCreateUI}
+          updateDeleteUI={updateDeleteUI}
+          updateUI={updateUI}
+          handleToastFail={handleToastFail}
+          handleToastSuccess={handleToastSuccess}
+          setLoading={setLoading}
+        />
+
+        <DataGrid
+          key={guests.id}
+          getRowId={(row) => row.id}
+          rows={guests}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
       </Box>
-      <TeamModal
-        type={typeModal}
-        open={isModal}
-        onClose={handleModalCloseWithParams}
-        selectedRow={selectedRow}
-        updateCreateUI={updateCreateUI}
-        updateDeleteUI={updateDeleteUI}
-        setLoading={setLoading}
-      />
+
+      <ToastContainer />
     </Box>
   );
 };
 
-export default Team;
+export default Guest;
