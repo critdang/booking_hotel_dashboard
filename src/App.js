@@ -48,7 +48,7 @@ function App() {
 
   // Check if current route is login or signup and hide the Sidebar
   useEffect(() => {
-    if (location.pathname === '/login' || location.pathname === '/signup') {
+    if (location.pathname === '/' || location.pathname === '/signup') {
       setIsSidebar(false);
     } else {
       setIsSidebar(true);
@@ -77,7 +77,7 @@ function App() {
                   )
                   }
               /> */}
-              <Route path="/login" exact  element={<Login setLoading={setLoading}/>} />
+              <Route path="/" exact  element={<Login setLoading={setLoading}/>} />
               <Route path="/team" element={<PrivateRoute Component={<Team setLoading={setLoading}/>}/>}/>
               <Route path="/dashboard" exact  element={<Dashboard setLoading={setLoading}/>} />
               <Route path="/guest" exact  element={<PrivateRoute Component={<Guests setLoading={setLoading}/>}/>} />

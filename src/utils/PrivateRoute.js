@@ -8,7 +8,7 @@ function PrivateRoute({Component}) {
   return signed ? (
     Component
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/" />
   );
 }
 
