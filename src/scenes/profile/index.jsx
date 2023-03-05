@@ -1,3 +1,4 @@
+import React, { useContext } from 'react';
 import {
   Box,
   Button,
@@ -14,13 +15,20 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from '../../components/Header';
-import * as React from 'react';
+import { useAuth } from '../../context/auth/auth';
 const Form = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
 
   const handleFormSubmit = (values) => {
     console.log(values);
   };
+
+  const { Logout } = useAuth();
+
+  const handleLogout = () => {
+    Logout();
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box m="20px">
@@ -209,6 +217,14 @@ const Form = () => {
               <Box display="flex" justifyContent="end" mt="20px">
                 <Button type="submit" color="secondary" variant="contained">
                   Update user
+                </Button>
+                <Button
+                  type="submit"
+                  color="warning"
+                  variant="contained"
+                  onClick={handleLogout}
+                >
+                  Log out
                 </Button>
               </Box>
             </form>

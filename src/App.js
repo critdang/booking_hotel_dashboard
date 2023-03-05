@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { Routes, Route,useLocation } from "react-router-dom";
+import { Routes, Route,useLocation, Navigate } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
@@ -22,7 +22,7 @@ import Login from './scenes/login';
 import Signup from './scenes/signup';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from "./context/auth/auth";
-import {PrivateRoute} from "./utils/PrivateRoute";
+import PrivateRoute from "./utils/PrivateRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
 const useStyles = makeStyles((theme) => ({
   loading: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const location = useLocation();
   const classes = useStyles();
-  const {isSigned, setSign } = useAuth();
+  const {signed, setSign } = useAuth();
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -181,20 +181,32 @@ function App() {
                   />
                 }
               /> */}
-              <Route path="/" element={<Dashboard setLoading={setLoading}/>} />
-              <Route path="/team" element={<Team setLoading={setLoading}/>} />
-              <Route path="/guest" element={<Guests setLoading={setLoading}/>} />
-              <Route path="/invoices" element={<Invoices setLoading={setLoading}/>} />
-              <Route path="/form" element={<Form />} />
-              <Route path="/category" element={<Category setLoading={setLoading}/>} />
-              <Route path="/room" element={<Room setLoading={setLoading}/>} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
-              <Route path="/profile" element={<Profile setLoading={setLoading}/>} />
+
+              <Route
+                path="/"
+                element={
+                  signed ? (
+                    <Navigate to="/" />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                  }
+              />
+              <Route path="/login" exact  element={<Login setLoading={setLoading}/>} />
+              <Route path="/team" element={<PrivateRoute Component={<Team setLoading={setLoading}/>}/>}/>
+              <Route path="/" exact  element={<Dashboard setLoading={setLoading}/>} />
+              <Route path="/guest" exact  element={<PrivateRoute Component={<Guests setLoading={setLoading}/>}/>} />
+              <Route path="/invoices" exact  element={<PrivateRoute Component={<Invoices setLoading={setLoading}/>}/>} />
+              <Route path="/category" exact element={<PrivateRoute Component={<Category setLoading={setLoading}/>}/>} />
+              <Route path="/room" exact  element={<PrivateRoute Component={<Room setLoading={setLoading}/>}/>}/>
+              <Route path="/profile" exact  element={<PrivateRoute Component={<Profile setLoading={setLoading}/>}/>}/>
+              <Route path="/form" exact  element={<Form />} />
+              <Route path="/bar" exact  element={<Bar />} />
+              <Route path="/pie" exact  element={<Pie />} />
+              <Route path="/line" exact  element={<Line />} />
+              <Route path="/faq" exact  element={<FAQ />} />
+              <Route path="/calendar" exact  element={<Calendar />} />
+              <Route path="/geography" exact  element={<Geography />} />
             </Routes>
           </main>
         </div>

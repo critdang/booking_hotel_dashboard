@@ -48,11 +48,7 @@ export default function LoginBody() {
   });
   const submitLogin = async (data) => {
     try {
-      const res = await Login(data);
-      console.log(
-        '🚀 ~ file: login-body.component.jsx ~ line 55 ~ submitLogin ~ res',
-        res
-      );
+      const res = await Login(data, navigate);
       navigate('/');
     } catch (error) {
       if (error) {

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { navigate } from 'react-router-dom';
 import * as API from '../../constants/api';
 import { toastAlertFail } from '../../utils/helperFn';
 
@@ -23,12 +24,11 @@ export const AuthProvider = ({ children }) => {
     loadStorageData();
   }, []);
 
-  const Login = async (data) => {
+  const Login = async (data, navigate) => {
     axios
       .post(API.LOGIN, data, { withCredentials: true })
 
       .then((res) => {
-        console.log('🚀 ~ file: auth.jsx ~ line 31 ~ .then ~ res', res);
         if (res.data.success) {
           setUser(res.data.message.userInfo);
           localStorage.setItem(
@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
             'userInfo',
             JSON.stringify(res.data.message.userInfo)
           );
+          navigate('/dashboard');
         }
       })
 
@@ -47,7 +48,6 @@ export const AuthProvider = ({ children }) => {
           '🚀 ~ file: login-body.component.jsx ~ line 68 ~ submitLogin ~ error',
           error
         );
-        toastAlertFail(error.response.data.message);
       });
   };
 

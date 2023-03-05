@@ -1,14 +1,16 @@
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/auth/auth';
+import { useEffect } from "react";
+import { Navigate , Route } from "react-router-dom";
+import { useAuth } from "../context/auth/auth";
 
-export function PrivateRoute({ element: Component, ...rest }) {
-  const navigate = useNavigate();
-  const { user } = useAuth();
+// HOC component to protect routes
+function PrivateRoute({Component}) {
+  const { signed } = useAuth();
 
-  if (!user) {
-    navigate('/login');
-    return null;
-  }
-
-  return <Component {...rest} />;
+  return signed ? (
+    Component
+  ) : (
+    <Navigate to="/login" />
+  );
 }
+
+export default PrivateRoute;
