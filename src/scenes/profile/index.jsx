@@ -3,6 +3,8 @@ import {
   Box,
   Button,
   FormControlLabel,
+  IconButton,
+  InputAdornment,
   Radio,
   RadioGroup,
   TextField,
@@ -17,13 +19,20 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from '../../components/Header';
 import { useAuth } from '../../context/auth/auth';
 import { useState } from 'react';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const Form = () => {
   const TOKEN = localStorage.getItem('token');
-
   const dataUser = JSON.parse(localStorage.getItem('userInfo'));
-
   const [userInfo, setUserInfo] = useState(dataUser);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
   const isNonMobile = useMediaQuery('(min-width:600px)');
 
   const handleFormSubmit = (values) => {
@@ -171,27 +180,51 @@ const Form = () => {
                 <TextField
                   fullWidth
                   variant="filled"
-                  type="text"
+                  type={showPassword ? 'text' : 'password'}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                   label="Current Password"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.address2}
-                  name="address2"
-                  error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
+                  value={values.oldPassword}
+                  name="oldPassword"
+                  error={!!touched.oldPassword && !!errors.oldPassword}
+                  helperText={touched.oldPassword && errors.oldPassword}
                   sx={{ gridColumn: 'span 2' }}
                 />
                 <TextField
                   fullWidth
                   variant="filled"
-                  type="text"
+                  type={showPassword ? 'text' : 'password'}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                   label="New Password"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.address2}
-                  name="address2"
-                  error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
+                  value={values.newPassword}
+                  name="newPassword"
+                  error={!!touched.newPassword && !!errors.newPassword}
+                  helperText={touched.newPassword && errors.newPassword}
                   sx={{ gridColumn: 'span 2' }}
                 />
               </Box>
@@ -227,16 +260,17 @@ const checkoutSchema = yup.object().shape({
     .string()
     .matches(phoneRegExp, 'Phone number is not valid')
     .required('required'),
-  address1: yup.string().required('required'),
-  address2: yup.string().required('required'),
+  oldPassword: yup.string().required('required'),
+  newPassword: yup.string().required('required'),
 });
+
 const initialValues = {
   firstName: '',
   lastName: '',
   email: '',
   contact: '',
-  address1: '',
-  address2: '',
+  oldPassword: '',
+  newPassword: '',
 };
 
 export default Form;

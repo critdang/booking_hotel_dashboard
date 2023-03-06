@@ -49,7 +49,7 @@ export default function LoginBody() {
   const submitLogin = async (data) => {
     try {
       const res = await Login(data, navigate);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       if (error) {
         console.log(
