@@ -10,9 +10,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link as RouterLink } from 'react-router-dom';
 import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import NotificationContent from './../notification/index';
+import Notification from './Notification';
 
 const Topbar = () => {
   const theme = useTheme();
@@ -56,22 +54,7 @@ const Topbar = () => {
         <IconButton onClick={handleClick}>
           <NotificationsOutlinedIcon />
         </IconButton>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
-          }}
-        >
-          <MenuItem onClick={handleClose}>
-            <NotificationContent notification={notificationData} />
-          </MenuItem>
-          <MenuItem onClick={handleClose}>Notification 2</MenuItem>
-          <MenuItem onClick={handleClose}>Notification 3</MenuItem>
-        </Menu>
+        <Notification />
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
