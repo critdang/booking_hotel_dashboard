@@ -79,7 +79,7 @@ function App() {
               /> */}
               <Route path="/" exact  element={<Login setLoading={setLoading}/>} />
               <Route path="/team" element={<PrivateRoute Component={<Team setLoading={setLoading}/>}/>}/>
-              <Route path="/dashboard" exact  element={<Dashboard setLoading={setLoading}/>} />
+              <Route path="/dashboard" exact  element={<PrivateRoute Component={<Dashboard setLoading={setLoading}/> }/>} />
               <Route path="/guest" exact  element={<PrivateRoute Component={<Guests setLoading={setLoading}/>}/>} />
               <Route path="/invoices" exact  element={<PrivateRoute Component={<Invoices setLoading={setLoading}/>}/>} />
               <Route path="/category" exact element={<PrivateRoute Component={<Category setLoading={setLoading}/>}/>} />

@@ -69,7 +69,9 @@ const Guest = ({ setLoading }) => {
   // get all team members
   useEffect(() => {
     axios
-      .get(`${API.GUEST}`)
+      .get(`${API.GUEST}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.success) {
           setGuests(res.data.message);

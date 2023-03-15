@@ -127,7 +127,9 @@ function TeamModal({
       formData.append('images', formFields.images);
     }
     await axios
-      .post(API.USER_IN_TEAM, formData)
+      .post(API.USER_IN_TEAM, formData, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('🚀 ~ file: RoomModal.jsx:87 ~ .then ~ res:', res);
         // updateCreateUI(res.data.message);
@@ -135,6 +137,7 @@ function TeamModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -153,13 +156,16 @@ function TeamModal({
     }
 
     await axios
-      .put(`${API.UPDATE_CATEGORY}/${data.id}`, formData)
+      .put(`${API.UPDATE_CATEGORY}/${data.id}`, formData, {
+        withCredentials: true,
+      })
       .then((res) => {
         // updateRoom({ id: data.id, ...formFields, thumbnail: preview });
         setLoading(false);
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -173,7 +179,9 @@ function TeamModal({
     console.log(`Deleting row ${selectedRow.id}`);
     setLoading(true);
     axios
-      .delete(`${API.USER_IN_TEAM}/${selectedRow.id}`)
+      .delete(`${API.USER_IN_TEAM}/${selectedRow.id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('🚀 ~ file: TeamModal.jsx:160 ~ .then ~ res:', res);
         updateDeleteUI(selectedRow.id);
@@ -181,6 +189,7 @@ function TeamModal({
         onClose();
       })
       .catch((error) => {
+        setLoading(false);
         console.error(
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error

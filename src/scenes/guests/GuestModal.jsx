@@ -127,7 +127,9 @@ function GuestModal({
     );
 
     await axios
-      .post(API.GUEST, formFields)
+      .post(API.GUEST, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateCreateUI(res.data.message);
         setLoading(false);
@@ -135,6 +137,7 @@ function GuestModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -150,7 +153,9 @@ function GuestModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .put(`${API.GUEST}/${selectedIdRow}`, formFields)
+      .put(`${API.GUEST}/${selectedIdRow}`, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateUI({ id: selectedIdRow, ...formFields });
         setLoading(false);
@@ -158,6 +163,7 @@ function GuestModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -171,7 +177,9 @@ function GuestModal({
     console.log(`Deleting row ${selectedIdRow}`);
     setLoading(true);
     axios
-      .delete(`${API.GUEST}/${selectedIdRow}`)
+      .delete(`${API.GUEST}/${selectedIdRow}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateDeleteUI(selectedIdRow);
         setLoading(false);
@@ -179,6 +187,7 @@ function GuestModal({
         onClose();
       })
       .catch((error) => {
+        setLoading(false);
         console.error(
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error

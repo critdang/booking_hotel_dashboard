@@ -7,18 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
-import {
-  Box,
-  DialogContentText,
-  InputBase,
-  IconButton,
-  Grid,
-} from '@mui/material';
+import { Box, DialogContentText, InputBase, Grid } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
 import * as API from '../../constants/api';
-import { Typography } from '@mui/material';
-import { toastAlertFail } from '../../utils/helperFn';
-import { AttachFile } from '@mui/icons-material';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -132,7 +123,9 @@ function RoomModal({
       formData.append('images', formFields.images);
     }
     await axios
-      .post(API.CREATE_ROOM, formData)
+      .post(API.CREATE_ROOM, formData, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('🚀 ~ file: RoomModal.jsx:87 ~ .then ~ res:', res);
         updateCreateUI(res.data.message);
@@ -141,6 +134,7 @@ function RoomModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -155,7 +149,9 @@ function RoomModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .put(`${API.GET_ROOMS}/${selectedIdRow}`, formFields)
+      .put(`${API.GET_ROOMS}/${selectedIdRow}`, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateUI({ id: selectedIdRow, ...formFields });
         setLoading(false);
@@ -163,6 +159,7 @@ function RoomModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -176,7 +173,9 @@ function RoomModal({
     console.log(`Deleting row ${selectedIdRow}`);
     setLoading(true);
     axios
-      .delete(`${API.CREATE_ROOM}/${selectedIdRow}`)
+      .delete(`${API.CREATE_ROOM}/${selectedIdRow}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateDeleteUI(selectedIdRow);
         setLoading(false);
@@ -184,6 +183,7 @@ function RoomModal({
         onClose();
       })
       .catch((error) => {
+        setLoading(false);
         console.error(
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error

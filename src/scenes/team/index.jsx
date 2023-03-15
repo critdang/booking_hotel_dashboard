@@ -52,7 +52,9 @@ const Team = ({ setLoading }) => {
   // get all team members
   useEffect(() => {
     axios
-      .get(`${API.GET_USERS}`)
+      .get(`${API.GET_USERS}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.success) {
           setTeam(res.data.message);

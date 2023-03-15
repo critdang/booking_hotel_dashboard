@@ -13,20 +13,12 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import db from '../../utils/firebase';
 const Notification = () => {
   const [newReviews, setNewReviews] = useState([]);
-  console.log(
-    '🚀 ~ file: Notification.jsx:16 ~ Notification ~ newReviews:',
-    newReviews
-  );
   const [modalOpen, setModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   useEffect(() => {
     const reviewsRef = db.ref('reviews');
     reviewsRef.on('value', (snapshot) => {
       const review = snapshot.val();
-      console.log(
-        '🚀 ~ file: Notification.jsx:13 ~ reviewsRef.on ~ review:',
-        review
-      );
       setNewReviews((prevReviews) => [...prevReviews, review]);
     });
     return () => {

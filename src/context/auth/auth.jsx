@@ -3,19 +3,25 @@ import axios from 'axios';
 import { navigate } from 'react-router-dom';
 import * as API from '../../constants/api';
 import { toastAlertFail } from '../../utils/helperFn';
+import { useCookies } from 'react-cookie';
 
 const AuthContext = createContext();
+
+function setCookieMethod(name, value, days) {
+  const expires = new Date(
+    Date.now() + days * 24 * 60 * 60 * 1000
+  ).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState();
-
   useEffect(() => {
     async function loadStorageData() {
-      const storageUser = localStorage.getItem('token');
-      const storageToken = localStorage.getItem('userInfo');
+      const storageUser = localStorage.getItem('userInfo');
 
-      if (storageUser && storageToken) {
+      if (storageUser) {
         setUser(JSON.parse(storageUser));
       }
       setLoading(false);
@@ -31,10 +37,8 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         if (res.data.success) {
           setUser(res.data.message.userInfo);
-          localStorage.setItem(
-            'token',
-            JSON.stringify(res.data.message.accessToken)
-          );
+          setCookieMethod('accessToken', res.data.message.accessToken, 1);
+
           localStorage.setItem(
             'userInfo',
             JSON.stringify(res.data.message.userInfo)
@@ -44,6 +48,8 @@ export const AuthProvider = ({ children }) => {
       })
 
       .catch((error) => {
+        navigate('/');
+        toastAlertFail('Login failed. Please contact to admin.');
         console.log(
           '🚀 ~ file: login-body.component.jsx ~ line 68 ~ submitLogin ~ error',
           error

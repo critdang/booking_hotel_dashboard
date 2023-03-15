@@ -44,7 +44,9 @@ const Invoices = ({ setLoading }) => {
   // get all rooms by category
   useEffect(() => {
     axios
-      .get(`${API.ORDER}`)
+      .get(`${API.ORDER}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.success) {
           setInvoices(res.data.message);

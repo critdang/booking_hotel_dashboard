@@ -126,7 +126,9 @@ function InvoiceModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .post(API.ORDER, formFields)
+      .post(API.ORDER, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateCreateUI(res.data.message);
         setLoading(false);
@@ -134,6 +136,7 @@ function InvoiceModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -148,7 +151,9 @@ function InvoiceModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .put(`${API.ORDER}/${formFields.id}`, formFields)
+      .put(`${API.ORDER}/${formFields.id}`, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateUI({ id: selectedRow.id, ...formFields });
         setLoading(false);
@@ -156,6 +161,7 @@ function InvoiceModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -169,7 +175,9 @@ function InvoiceModal({
     console.log(`Deleting row ${selectedRow.id}`);
     setLoading(true);
     axios
-      .delete(`${API.ORDER}/${selectedRow.id}`)
+      .delete(`${API.ORDER}/${selectedRow.id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateDeleteUI(selectedRow.id);
         setLoading(false);
@@ -177,6 +185,7 @@ function InvoiceModal({
         onClose();
       })
       .catch((error) => {
+        setLoading(false);
         console.error(
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error

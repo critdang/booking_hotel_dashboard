@@ -35,7 +35,7 @@ export default function LoginBody() {
         .string()
         .required('Password is a required field')
         .max(32)
-        .min(6),
+        .min(3),
     })
     .required();
 
@@ -48,8 +48,7 @@ export default function LoginBody() {
   });
   const submitLogin = async (data) => {
     try {
-      const res = await Login(data, navigate);
-      navigate('/dashboard');
+      await Login(data, navigate);
     } catch (error) {
       if (error) {
         console.log(

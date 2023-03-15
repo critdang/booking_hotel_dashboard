@@ -113,7 +113,9 @@ function CreateCategoryModal({
 
     formData.append('thumbnail', formFields.thumbnail);
     await axios
-      .post(API.CATEGORY, formData)
+      .post(API.CATEGORY, formData, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('🚀 ~ file: CategoryModal.jsx:63 ~ .then ~ res:', res);
         updateCreateUI(res.data.message);
@@ -122,6 +124,7 @@ function CreateCategoryModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -137,7 +140,9 @@ function CreateCategoryModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .put(`${API.CATEGORY}/${selectedIdRow}`, formFields)
+      .put(`${API.CATEGORY}/${selectedIdRow}`, formFields, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateUI({ id: selectedIdRow, ...formFields });
         setLoading(false);
@@ -145,6 +150,7 @@ function CreateCategoryModal({
         onClose(res.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(
           '🚀 ~ file: CategoryModal.jsx:69 ~ handleSubmit ~ error:',
           error
@@ -159,7 +165,9 @@ function CreateCategoryModal({
     console.log(`Deleting row ${selectedIdRow}`);
     setLoading(true);
     axios
-      .delete(`${API.CATEGORY}/${selectedIdRow}`)
+      .delete(`${API.CATEGORY}/${selectedIdRow}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         updateDeleteUI(selectedIdRow);
         setLoading(false);
@@ -167,6 +175,7 @@ function CreateCategoryModal({
         onClose();
       })
       .catch((error) => {
+        setLoading(false);
         console.error(
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error
