@@ -51,6 +51,7 @@ function CreateCategoryModal({
   const [files, setFiles] = useState([]);
   const [preview, setPreview] = useState(null);
   const [formFields, setFormFields] = useState();
+  console.log('🚀 ~ file: CategoryModal.jsx:54 ~ formFields:', formFields);
 
   // get selected row at first render
   useEffect(() => {
@@ -119,6 +120,10 @@ function CreateCategoryModal({
       .then((res) => {
         console.log('🚀 ~ file: CategoryModal.jsx:63 ~ .then ~ res:', res);
         updateCreateUI(res.data.message);
+        // reset value in form and file
+        setFormFields(null);
+        setFile(null);
+
         setLoading(false);
         handleToastSuccess('Create category successfully');
         onClose(res.data);

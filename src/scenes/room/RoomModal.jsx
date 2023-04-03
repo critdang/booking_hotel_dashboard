@@ -127,7 +127,6 @@ function RoomModal({
         withCredentials: true,
       })
       .then((res) => {
-        console.log('🚀 ~ file: RoomModal.jsx:87 ~ .then ~ res:', res);
         updateCreateUI(res.data.message);
         setLoading(false);
         handleToastSuccess('Create room successfully');

@@ -126,7 +126,7 @@ function InvoiceModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .post(API.ORDER, formFields, {
+      .post(API.INVOICE, formFields, {
         withCredentials: true,
       })
       .then((res) => {
@@ -151,7 +151,7 @@ function InvoiceModal({
     const formData = new FormData(document.getElementById('my-form'));
 
     await axios
-      .put(`${API.ORDER}/${formFields.id}`, formFields, {
+      .put(`${API.INVOICE}/${formFields.id}`, formFields, {
         withCredentials: true,
       })
       .then((res) => {
@@ -175,7 +175,7 @@ function InvoiceModal({
     console.log(`Deleting row ${selectedRow.id}`);
     setLoading(true);
     axios
-      .delete(`${API.ORDER}/${selectedRow.id}`, {
+      .delete(`${API.INVOICE}/${selectedRow.id}`, {
         withCredentials: true,
       })
       .then((res) => {

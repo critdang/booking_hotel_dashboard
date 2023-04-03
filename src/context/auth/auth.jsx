@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
   const Login = async (data, navigate) => {
     axios
-      .post(API.LOGIN, data, { withCredentials: true })
+      .post(API.DASHBOARD, data, { withCredentials: true })
 
       .then((res) => {
         if (res.data.success) {

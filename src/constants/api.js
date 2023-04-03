@@ -25,7 +25,7 @@ export const GET_CATEGORY = `${BASE_URL}/category`;
 
 export const GET_ROOM_BY_CATEGORY = `${BASE_URL}/category`;
 
-export const ORDER = `${BASE_URL}/order`;
+export const INVOICE = `${BASE_URL}/invoice`;
 
 export const CREATE_CATEGORY = `${BASE_URL}/category`;
 
@@ -44,7 +44,7 @@ export const GET_ROOMS = `${BASE_URL}/room`
 
 export const CREATE_ROOM = `${BASE_URL}/room`
 
-export const GET_ORDERS = `${BASE_URL}/order`
+export const GET_ORDERS = `${BASE_URL}/invoice`
 
 // USER IN TEAM
 export const USER_IN_TEAM = `${BASE_URL}/team/user`
@@ -52,3 +52,5 @@ export const USER_IN_TEAM = `${BASE_URL}/team/user`
 // GUEST
 export const GUEST = `${BASE_URL}/guest`
 
+// DASHBOARD
+export const DASHBOARD = `${BASE_URL}/dashboard`

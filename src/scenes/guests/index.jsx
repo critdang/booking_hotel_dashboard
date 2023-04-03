@@ -82,6 +82,8 @@ const Guest = ({ setLoading }) => {
           '🚀 ~ file: room-body.component.jsx ~ line 124 ~ handleSubmitRoom ~ error',
           error
         );
+        console.log('hereeeeee');
+        return toastAlertFail('error');
       });
   }, []);
   // handle toast
@@ -121,7 +123,6 @@ const Guest = ({ setLoading }) => {
       headerName: 'Gender',
       flex: 1,
     },
-
     {
       headerName: 'Actions',
       width: 100,

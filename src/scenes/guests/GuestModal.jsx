@@ -132,6 +132,7 @@ function GuestModal({
       })
       .then((res) => {
         updateCreateUI(res.data.message);
+        formFields(null);
         setLoading(false);
         handleToastSuccess('Create room successfully');
         onClose(res.data);

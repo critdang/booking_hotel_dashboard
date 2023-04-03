@@ -7,12 +7,13 @@ import { Box } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import * as API from '../../constants/api';
 import axios from 'axios';
-import { IconButton } from '@mui/material';
+import { IconButton, Button } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { toastAlertFail, toastAlertSuccess } from '../../utils/helperFn';
 import InvoiceModal from './InvoiceModal';
 import { ToastContainer } from 'react-toastify';
-
+import { useNavigate } from 'react-router-dom';
+import '../../index.css';
 const Invoices = ({ setLoading }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -44,10 +45,11 @@ const Invoices = ({ setLoading }) => {
   // get all rooms by category
   useEffect(() => {
     axios
-      .get(`${API.ORDER}`, {
+      .get(`${API.INVOICE}`, {
         withCredentials: true,
       })
       .then((res) => {
+        console.log('🚀 ~ file: index.jsx:51 ~ .then ~ res:', res);
         if (res.data.success) {
           setInvoices(res.data.message);
         }
@@ -90,6 +92,7 @@ const Invoices = ({ setLoading }) => {
     toastAlertSuccess(message);
   };
 
+  const navigate = useNavigate();
   const columns = [
     { field: 'id', headerName: 'ID', flex: 0.5 },
     {
@@ -161,16 +164,22 @@ const Invoices = ({ setLoading }) => {
         return (
           <>
             <div>
-              <IconButton
+              {/* <IconButton
                 onClick={() => handleModalOpenWithParams('edit', params)}
               >
                 <Edit sx={{ color: colors.blueAccent[500] }} />
               </IconButton>
-              {/* <IconButton onClick={() => handleDelete(params.id)}> */}
               <IconButton
                 onClick={() => handleModalOpenWithParams('delete', params)}
               >
                 <Delete sx={{ color: colors.redAccent[500] }} />
+              </IconButton> */}
+              <IconButton
+                onClick={() => {
+                  navigate(`/invoice/${params.row.id}`);
+                }}
+              >
+                <Button variant="outlined">Detail</Button>
               </IconButton>
             </div>
           </>

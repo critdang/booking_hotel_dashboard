@@ -24,6 +24,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from "./context/auth/auth";
 import PrivateRoute from "./utils/PrivateRoute";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import DetailInvoices from './scenes/detailInvoice/index';
 const useStyles = makeStyles((theme) => ({
   loading: {
     position: "fixed",
@@ -82,6 +83,7 @@ function App() {
               <Route path="/dashboard" exact  element={<PrivateRoute Component={<Dashboard setLoading={setLoading}/> }/>} />
               <Route path="/guest" exact  element={<PrivateRoute Component={<Guests setLoading={setLoading}/>}/>} />
               <Route path="/invoices" exact  element={<PrivateRoute Component={<Invoices setLoading={setLoading}/>}/>} />
+              <Route path="/invoice/:id" exact  element={<PrivateRoute Component={<DetailInvoices setLoading={setLoading}/>}/>} />
               <Route path="/category" exact element={<PrivateRoute Component={<Category setLoading={setLoading}/>}/>} />
               <Route path="/room" exact  element={<PrivateRoute Component={<Room setLoading={setLoading}/>}/>}/>
               <Route path="/profile" exact  element={<PrivateRoute Component={<Profile setLoading={setLoading}/>}/>}/>
