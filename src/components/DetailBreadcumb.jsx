@@ -2,17 +2,14 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { Link } from 'react-router-dom';
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Container } from '@mui/system';
-import { Box, CssBaseline } from '@mui/material';
-const theme = createTheme();
 
 const DetailBreadcumb = (data) => {
   const dataInvoice = data.data;
   return (
     <Container
-      maxWidth="lg"
+      disableGutters
+      maxWidth="xl"
       style={{
         pb: 5,
       }}

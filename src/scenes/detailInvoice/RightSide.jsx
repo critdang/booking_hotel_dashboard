@@ -9,10 +9,10 @@ import { tokens } from '../../theme';
 import { makeStyles } from '@material-ui/styles';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const useStyles = makeStyles({
-  statusPending: {
+  statusNotCheck: {
     color: 'red',
   },
-  statusApproved: {
+  statusCheck: {
     color: 'green',
   },
 });
@@ -36,9 +36,12 @@ const RightSide = (data) => {
             Status:{' '}
             <b
               className={
-                dataInvoice.invoice && dataInvoice.invoice.status === 'Pending'
-                  ? classes.statusPending
-                  : classes.statusApproved
+                (dataInvoice.invoice &&
+                  dataInvoice.invoice.status === 'Cancel') ||
+                (dataInvoice.invoice &&
+                  dataInvoice.invoice.status === 'Pending')
+                  ? classes.statusNotCheck
+                  : classes.statusCheck
               }
             >
               {dataInvoice.invoice && dataInvoice.invoice.status}
@@ -131,16 +134,80 @@ const RightSide = (data) => {
           marginBottom: '20px',
         }}
       >
-        <Grid item xs={5}>
-          <Button color="secondary" disabled variant="contained" fullWidth>
-            Check-in
-          </Button>
-        </Grid>
-        <Grid item xs={5}>
-          <Button color="secondary" variant="contained" fullWidth>
-            Check-out
-          </Button>
-        </Grid>
+        {dataInvoice.invoice &&
+          dataInvoice.invoice.checkInStatus === 'Not Check In' &&
+          (dataInvoice.invoice.status === 'Pending' ||
+            dataInvoice.invoice.status === 'Cancel') && (
+            <>
+              <Grid item xs={5}>
+                <Button
+                  color="secondary"
+                  disabled
+                  variant="contained"
+                  fullWidth
+                >
+                  Check-in
+                </Button>
+              </Grid>
+              <Grid item xs={5}>
+                <Button
+                  color="secondary"
+                  disabled
+                  variant="contained"
+                  fullWidth
+                >
+                  Check-in
+                </Button>
+              </Grid>
+            </>
+          )}
+
+        {dataInvoice.invoice &&
+          dataInvoice.invoice.checkInStatus === 'Check In' && (
+            <>
+              <Grid item xs={5}>
+                <Button
+                  color="secondary"
+                  disabled
+                  variant="contained"
+                  fullWidth
+                >
+                  Check-in
+                </Button>
+              </Grid>
+              <Grid item xs={5}>
+                <Button color="secondary" variant="contained" fullWidth>
+                  Check-out
+                </Button>
+              </Grid>
+            </>
+          )}
+
+        {dataInvoice.invoice &&
+          dataInvoice.invoice.checkInStatus === 'Check Out' && (
+            <>
+              <Grid item xs={5}>
+                <Button
+                  color="secondary"
+                  disabled
+                  variant="contained"
+                  fullWidth
+                >
+                  Check-in
+                </Button>
+              </Grid>
+              <Grid item xs={5}>
+                <Button
+                  color="secondary"
+                  disabled
+                  variant="contained"
+                  fullWidth
+                >
+                  Check-out
+                </Button>
+              </Grid>
+            </>
+          )}
       </Grid>
 
       <Button type="submit" color="secondary" variant="contained" fullWidth>

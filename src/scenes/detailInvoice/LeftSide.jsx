@@ -30,11 +30,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-const rows = [
-  { id: 1, name: 'Massage', price: 100 },
-  { id: 2, name: 'Restaurant', price: 100 },
-  { id: 3, name: 'Spa', price: 100 },
-];
 const columns = [
   { field: 'id', headerName: 'ID' },
   {
@@ -125,12 +120,12 @@ const LeftSide = (data) => {
                   className={
                     (dataInvoice.invoice &&
                       dataInvoice.invoice.checkInStatus === 'Check In') ||
-                    'Check Out'
+                    dataInvoice.invoice.checkInStatus === 'Check Out'
                       ? classes.statusCheck
                       : classes.statusNotCheck
                   }
                 >
-                  {dataInvoice.invoice && dataInvoice.invoice.status}
+                  {dataInvoice.invoice && dataInvoice.invoice.checkInStatus}
                 </b>
               </Typography>
             </Grid>
@@ -139,10 +134,10 @@ const LeftSide = (data) => {
                 Bill to
               </Typography>
               <Typography variant="body1" gutterBottom textAlign="right">
-                <b>{dataInvoice.invoice && dataInvoice.customer.fullName}</b>
+                <b>{dataInvoice.customer && dataInvoice.customer.fullName}</b>
               </Typography>
               <Typography variant="body1" gutterBottom textAlign="right">
-                <b>{dataInvoice.invoice && dataInvoice.customer.address}</b>
+                <b>{dataInvoice.customer && dataInvoice.customer.address}</b>
               </Typography>
             </Grid>
           </Grid>
@@ -259,7 +254,7 @@ const LeftSide = (data) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Typography variant="body1" gutterBottom textAlign="right">
-                    <b>${dataInvoice.totalServicesPrice}</b>
+                    <b>${dataInvoice && dataInvoice.totalServicesPrice}</b>
                   </Typography>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -292,7 +287,7 @@ const LeftSide = (data) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <Typography variant="body1" gutterBottom textAlign="right">
-                    <b>{dataInvoice && dataInvoice.total}</b>
+                    <b>${dataInvoice && dataInvoice.total}</b>
                   </Typography>
                 </Grid>
               </Grid>
