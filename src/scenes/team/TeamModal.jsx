@@ -176,7 +176,6 @@ function TeamModal({
   };
 
   const handleDelete = () => {
-    console.log(`Deleting row ${selectedRow.id}`);
     setLoading(true);
     axios
       .delete(`${API.USER_IN_TEAM}/${selectedRow.id}`, {

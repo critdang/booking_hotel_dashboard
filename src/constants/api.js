@@ -24,7 +24,7 @@ export const UPLOAD_AVATAR = `${BASE_URL}/user/updateAvatar`;
 export const GET_CATEGORY = `${BASE_URL}/category`;
 
 export const GET_ROOM_BY_CATEGORY = `${BASE_URL}/category`;
-
+// INVOICE
 export const INVOICE = `${BASE_URL}/invoice`;
 
 export const CREATE_CATEGORY = `${BASE_URL}/category`;

@@ -54,7 +54,7 @@ const Topbar = () => {
         <IconButton onClick={handleClick}>
           <NotificationsOutlinedIcon />
         </IconButton>
-        <Notification />
+        {/* <Notification /> */}
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>

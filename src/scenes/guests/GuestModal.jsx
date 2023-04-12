@@ -121,10 +121,6 @@ function GuestModal({
     // const formData = new FormData(document.getElementById('my-form'));
     // formData.append('thumbnail', formFields.thumbnail);
     const formData = new FormData(document.getElementById('my-form'));
-    console.log(
-      '🚀 ~ file: GuestModal.jsx:140 ~ handleCreateUserInTeam ~ formFields:',
-      formFields
-    );
 
     await axios
       .post(API.GUEST, formFields, {
